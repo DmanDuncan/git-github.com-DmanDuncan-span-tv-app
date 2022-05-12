@@ -30,15 +30,33 @@ body {
     position: absolute;
     top: 0;
     bottom: 0;
+    left: 0;
+    right: 0;
     display: flex;
-    justify-content: center;
+    justify-content: left;
     align-items: center;
 
-    .menu {
-        list-style: none;
-        display: flex;
-        flex-direction: column;
-    }
+        .menu-wrapper {
+            position: relative;
+            height: 100%;
+            
+            .menu {
+                list-style: none;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                width: 300px;
+                height: 100%;
+                background-color: #102e52;
+                border-right: 1px solid #fa8404;
+                padding: 0;
+                margin: 0;
+            
+                .menu-item {
+                    color: #fa8404;
+                }
+            }
+        }
 }
 
 // IMAGE SLIDER COMPONENT

@@ -1,18 +1,20 @@
 export function Menu() {
     return (
       <div className="menu-container">
-        <ul className={"menu"}>
-            <li>one</li>
-            <li>two</li>
-            <li>three</li>
-            <li>four</li>
-            <li>five</li>
-            <li>six</li>
-            <li>sven</li>
-            <li>eight</li>
-            <li>nine</li>
-            <li>ten</li>
-        </ul>
+        <div className="menu-wrapper">
+            <ul className={"menu"}>
+                <li className={"menu-item"}>one</li>
+                <li className={"menu-item"}>two</li>
+                <li className={"menu-item"}>three</li>
+                <li className={"menu-item"}>four</li>
+                <li className={"menu-item"}>five</li>
+                <li className={"menu-item"}>six</li>
+                <li className={"menu-item"}>sven</li>
+                <li className={"menu-item"}>eight</li>
+                <li className={"menu-item"}>nine</li>
+                <li className={"menu-item"}>ten</li>
+            </ul> 
+          </div>
       </div>
     );
 }
