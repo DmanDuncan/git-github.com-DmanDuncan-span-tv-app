@@ -1,15 +1,26 @@
-
-import { ImageContainer } from './components/Image-container';
-import { Menu } from './components/Menu';
-import { useState } from 'react';
+import { useEffect, useState} from 'react';
+import { ImageContainer } from './components/image-container.js';
+import { Menu } from './components/menu.js';
+import { MenuOpen } from './components/menu-open.js';
 
 function Home() {
 
+  const [menu, setMenu] = useState(false);
+
   return (
     <div className="Home-container">
-      <h1 className={"topic"}>Topic</h1> 
+      <h1 className={"topic"}>Topic {menu}</h1>
+
       <ImageContainer />
-      <Menu />
+      
+      {(menu === true) &&
+        <Menu setMenu={setMenu}/>
+      }
+
+      {(menu !== true) &&
+        <MenuOpen setMenu={setMenu}/>
+      }  
+
     </div>
   );
 }

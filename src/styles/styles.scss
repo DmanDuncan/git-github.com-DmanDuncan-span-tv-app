@@ -1,0 +1,193 @@
+@import url("https://fonts.googleapis.com/css2?family=Raleway&display=swap");
+
+// Variables
+// ----------------------------------
+$primary: #fa8404;
+$seconday: #102e52;
+
+// GLOBAL
+// ----------------------------------
+html {
+    overflow-x: hidden;
+}
+
+body {
+    margin: 0;
+    background-color: $seconday;
+    font-family: 'Raleway', sans-serif;
+}
+
+// HOME COMPONENT
+// ----------------------------------
+.Home-container {
+    position: relative;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    
+    .topic {
+        margin-left: 30px;
+        text-align: center;
+        color: $primary;
+    }
+}
+
+// MENU COMPONENT
+// ----------------------------------
+.topic-menu-container {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    top: 0;
+    bottom: 0;
+    width: 0;
+
+    .topic-menu-wrapper {
+        width: 90px;
+        padding: 10px;
+        background-color: rgb(16,46,82, 0.5);
+        border-radius: 0 5px 5px 0;
+        cursor: pointer;
+        transition: ease-in-out;
+        transition: 500ms;
+        
+        .menu-icon {
+            width: inherit;
+        }
+        
+        .topic-text {
+            width: inherit;
+            text-align: center;
+            margin: 0;
+            font-size: 20px;
+            text-transform: uppercase;
+            color: white;
+            transition: ease-in-out;
+            transition: 500ms;
+        }
+
+
+        &:hover {
+            .topic-text {
+                color: $primary;
+            }
+        }
+    }
+    
+}
+
+// MENU COMPONENT
+// ----------------------------------
+.menu-container {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+
+        &::before {
+            content: "";
+            background-color: #fa8404;
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            opacity: 0.2;
+        }
+        .menu-wrapper {
+            position: relative;
+            height: 100%;
+
+            
+            .menu-close {
+                position: absolute;
+                right: 20px;
+                top: 20px;
+                width: 40px;
+                height: 40px;
+                padding: 5px;
+                cursor: pointer;
+            }
+            
+            .menu {
+                list-style: none;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                width: 300px;
+                height: 100%;
+                background-color: $seconday;
+                border-right: 1px solid $primary;
+                padding: 0;
+                margin: 0;
+                
+                .menu-item {
+                    width: fit-content;
+                    margin-bottom: 15px;
+                    padding: 5px 15px;
+                    font-size: 20px;
+                    font-weight: bold;
+                    text-transform: uppercase;
+                    color: #ffffff;
+                    cursor: pointer;
+                    transition: ease-in-out;
+                    transition: 500ms;
+
+                    &:hover {
+                        color: $primary;
+                    }
+
+                    &:last-child {
+                        margin-bottom: 0px;
+                    }
+                }
+            }
+        }
+}
+
+// IMAGE SLIDER COMPONENT
+// ----------------------------------
+.image-container {
+    position: relative;
+    width: 100%;
+    height: 800px;
+ 
+    ::-webkit-scrollbar {
+        width: 1px;
+    }
+    
+    ::-webkit-scrollbar-track {
+        border: 1px solid $primary; 
+        border-radius: 15px;
+    }
+    
+    ::-webkit-scrollbar-thumb {
+        background: $primary; 
+        border-radius: 15px;
+    }
+
+    .image-wrapper {
+        overflow-x: scroll;
+        overflow-y: hidden;
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        height: inherit;
+        padding: 0 15px;
+        white-space: nowrap;
+        
+        .image-item {
+            display: inline-block;
+            margin: 15px;
+            width: 350px;
+            height: 350px;
+            border: 1px solid $primary;
+            border-radius: 2px;
+        }
+    }
+}
