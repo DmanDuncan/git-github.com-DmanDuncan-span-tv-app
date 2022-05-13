@@ -2,7 +2,7 @@ import menuClose from '../images/close-menu-icon.svg';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 
-export function Menu({setMenu}) { 
+export function Menu({setMenu, setTopicTitle, setTopicSlug}) { 
 
   const [topics, setTopics] = useState ([]);
 
@@ -10,11 +10,11 @@ export function Menu({setMenu}) {
     axios.get(`https://api.unsplash.com/topics/?client_id=DgfmO40HG_VBzm-OpOdFQOB3fND-lzvHRMcf3ahoMAE`)
     .then((res) => {
       setTopics([...topics, ...res.data]);
-      // console.log(res.data);
+      console.log(res.data);
     });
   }, []); 
 
-  return (
+  return ( 
     <div className="menu-container">
       <div className={"menu-wrapper"}>
           <img className={"menu-close"} src={menuClose} alt="" onClick={() => {setMenu(false)}}/>
@@ -22,8 +22,8 @@ export function Menu({setMenu}) {
           {/* {topics.map(topic => ( 
             <li className={"menu-item"} >{topic.title}</li>
           ))}  */}
-              <li className={"menu-item"}>one</li>
-              <li className={"menu-item"}>two</li>
+              <li className={"menu-item"} onClick={() => {setTopicTitle("Architecture"); setTopicSlug("/topics/architecture");}}>one</li>
+              <li className={"menu-item"} onClick={() => {setTopicTitle("Digital Nomad"); setTopicSlug("/topics/digital-nomad/");}}>two</li>
               <li className={"menu-item"}>three</li>
               <li className={"menu-item"}>four</li>
               <li className={"menu-item"}>five</li>

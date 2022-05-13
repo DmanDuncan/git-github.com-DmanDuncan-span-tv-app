@@ -5,7 +5,7 @@ export function MenuOpen({setMenu}) {
         <div className={"topic-menu-container"}>
             <div className={"topic-menu-wrapper"} onClick={() => setMenu(true)}>
                 <img className={"menu-icon"} src={menuOpen} alt="" />
-                <p className={"topic-text"}>Text</p>
+                <p className={"topic-text"}>Topics</p>
             </div>
         </div>
     )

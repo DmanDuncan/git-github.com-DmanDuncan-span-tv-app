@@ -1,29 +1,29 @@
 import { useEffect, useState} from 'react';
 import axios from 'axios';
 
-export function ImageContainer(topic) {
+export function ImageContainer({topicSlug}) {
   
   const [firstImageArr, setFirstImageArr] = useState ([]);
   const [secondImageArr, setSecondImageArr] = useState ([]);
 
   useEffect(() => {
     
-    axios.get(`https://api.unsplash.com/topics/architecture/photos/?client_id=DgfmO40HG_VBzm-OpOdFQOB3fND-lzvHRMcf3ahoMAE`)
+    axios.get('https://api.unsplash.com/topics/architecture/photos/?client_id=DgfmO40HG_VBzm-OpOdFQOB3fND-lzvHRMcf3ahoMAE')
     .then((res) => {
       setFirstImageArr([...firstImageArr, ...res.data]);
-      // console.log(res.data);
+      // console.log(res.data);/
+      console.log(topicSlug);
     });
  
-    axios.get(`https://api.unsplash.com/topics/architecture/photos/?client_id=DgfmO40HG_VBzm-OpOdFQOB3fND-lzvHRMcf3ahoMAE`)
+    axios.get('https://api.unsplash.com/topics/architecture/photos/?client_id=DgfmO40HG_VBzm-OpOdFQOB3fND-lzvHRMcf3ahoMAE')
     .then((res) => {
       setSecondImageArr([...secondImageArr, ...res.data]);
-      // console.log(res.data);
+      // console.log(res.data); 
     });
  
   }, []);
 
   // const scrollContainer = document.querySelector(".image-wrapper");
-      
   //       scrollContainer.addEventListener("wheel", (evt) => {
   //         evt.preventDefault();
   //         scrollContainer.scrollLeft += evt.deltaY;
@@ -31,6 +31,7 @@ export function ImageContainer(topic) {
   
   return (
     <div className={"image-container"}>
+      <p>{topicSlug}</p>
       <div className="image-wrapper" onWheel = {(e) => 
       { 
         const scrollContainer = document.querySelector(".image-wrapper");
