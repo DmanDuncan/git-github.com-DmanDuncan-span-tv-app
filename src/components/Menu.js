@@ -1,39 +1,18 @@
 import menuClose from '../images/close-menu-icon.svg';
-import { useEffect, useState } from 'react';
-import axios from 'axios';
 
-export function Menu({setMenu, setTopicTitle, setTopicSlug}) { 
-
-  const [topics, setTopics] = useState ([]);
-
-  useEffect(() => {
-    axios.get(`https://api.unsplash.com/topics/?client_id=DgfmO40HG_VBzm-OpOdFQOB3fND-lzvHRMcf3ahoMAE`)
-    .then((res) => {
-      setTopics([...topics, ...res.data]);
-      console.log(res.data);
-    });
-  }, []); 
+export function Menu({setMenu, setHome, setTopicTitle, topics, handleSubmit}) { 
 
   return ( 
     <div className="menu-container">
-      <div className={"menu-wrapper"}>
-          <img className={"menu-close"} src={menuClose} alt="" onClick={() => {setMenu(false)}}/>
-          <ul className={"menu"}>
-          {/* {topics.map(topic => ( 
-            <li className={"menu-item"} >{topic.title}</li>
-          ))}  */}
-              <li className={"menu-item"} onClick={() => {setTopicTitle("Architecture"); setTopicSlug("/topics/architecture");}}>one</li>
-              <li className={"menu-item"} onClick={() => {setTopicTitle("Digital Nomad"); setTopicSlug("/topics/digital-nomad/");}}>two</li>
-              <li className={"menu-item"}>three</li>
-              <li className={"menu-item"}>four</li>
-              <li className={"menu-item"}>five</li>
-              <li className={"menu-item"}>six</li>
-              <li className={"menu-item"}>seven</li>
-              <li className={"menu-item"}>eight</li>
-              <li className={"menu-item"}>nine</li>
-              <li className={"menu-item"}>ten</li> 
-          </ul> 
-        </div>
-    </div>
+        <div className={"menu-wrapper"}>
+            <img className={"menu-close"} src={menuClose} alt="" onClick={() => {setMenu(false);}}/>
+            <ul className={"menu"}>
+              <li className={"menu-item"} onClick={() => {setHome(true); setTopicTitle("Home"); setMenu(false);}}>Home</li>
+              {topics.map(topic => ( 
+                <li className={"menu-item"} key={topic.id} onClick={() => {setHome(false); setTopicTitle(topic.title); handleSubmit(topic.slug); setMenu(false); }}>{topic.title}</li>
+              ))} 
+            </ul> 
+          </div>
+      </div>
   );
 }
