@@ -8,62 +8,86 @@ import axios from 'axios';
 function Home() {
 
   const [menu, setMenu] = useState(false);
-  const [topicSlug, setTopicSlug] = useState("");
-  const [topicTitle, setTopicTitle] = useState("");
+  const [onHome, setHome] = useState(true);
+  const [topicTitle, setTopicTitle] = useState("Home");
   const [topics, setTopics] = useState ([]);
+  const [homePhotos, setHomePhotos] = useState ([]);
+  let [photos, setPhotos] = useState ([]);
   const [clientId,setClientId] = ("DgfmO40HG_VBzm-OpOdFQOB3fND-lzvHRMcf3ahoMAE");
 
   useEffect(() => {
     axios.get(`https://api.unsplash.com/topics/?client_id=DgfmO40HG_VBzm-OpOdFQOB3fND-lzvHRMcf3ahoMAE`)
     .then((res) => {
       setTopics([...topics, ...res.data]);
-      console.log(res.data);
     });
+
+    axios.get(`https://api.unsplash.com/photos/?client_id=DgfmO40HG_VBzm-OpOdFQOB3fND-lzvHRMcf3ahoMAE`)
+    .then((res) => {
+      setHomePhotos([...homePhotos, ...res.data]);
+    });
+
   }, []); 
 
-  // const handleChange = (event) => {
-  //   setPhoto(event.target.value)
-  // }
-
   const handleSubmit = (slug) => {
-    console.log(slug);
 
-    const url = "https://api.unsplash.com/search/photos?page=1&query=" + topicSlug + "&client_="+clientId;
-
-    // axios.get(url)
-    // .then((res) => {
-    //   console.log(res.data);
-    // })
-
-    axios.get("https://api.unsplash.com/topics/" + test + "/photos?client_id=DgfmO40HG_VBzm-OpOdFQOB3fND-lzvHRMcf3ahoMAE")
+    axios.get(`https://api.unsplash.com/topics/${slug}/photos?client_id=DgfmO40HG_VBzm-OpOdFQOB3fND-lzvHRMcf3ahoMAE`)
     .then((res) => {
-      // setTopics([...topics, ...res.data]);
-      console.log(res.data);
+      setPhotos(photos = []);
+      setPhotos([...photos, ...res.data])
     });
   }
 
   return (
     <div className="Home-container">
-      <h1 className={"topic"}>TITLE:{topicTitle} SLUG:{topicSlug}</h1>
+      <h1 className={"topic"}>{topicTitle}</h1>
 
-      {/* <ImageContainer topicSlug={topicSlug} /> */}
-      
-      {(menu === true) &&
+      {menu &&
         <div className="menu-container">
           <div className={"menu-wrapper"}>
-              <img className={"menu-close"} src={menuClose} alt="" onClick={() => {setMenu(false)}}/>
+              <img className={"menu-close"} src={menuClose} alt="" onClick={() => {setMenu(false);}}/>
               <ul className={"menu"}>
+                <li className={"menu-item"} onClick={() => {setHome(true); setTopicTitle("Home"); setMenu(false);}}>Home</li>
                 {topics.map(topic => ( 
-                  <li className={"menu-item"} key={topic.id} onClick={() => {setTopicTitle(topic.title); handleSubmit(topic.slug);}}>{topic.title}</li>
+                  <li className={"menu-item"} key={topic.id} onClick={() => {setHome(false); setTopicTitle(topic.title); handleSubmit(topic.slug); setMenu(false); }}>{topic.title}</li>
                 ))} 
               </ul> 
             </div>
         </div>
+      } 
+
+      {!menu &&
+        <MenuOpen setMenu={setMenu}/>
       }
 
-      {(menu !== true) &&
-        <MenuOpen setMenu={setMenu}/>
-      }  
+      {onHome &&
+      <div className={"image-container"}>
+        <div className={"image-wrapper"} onWheel = {(e) => 
+          { 
+            const scrollContainer = document.querySelector(".image-wrapper");
+              scrollContainer.scrollLeft += e.deltaY;
+          }}>
+
+          {homePhotos.map(image => ( 
+            <img className={"image-item"} src={image.urls.regular} key={image.id}/>
+          ))}
+        </div>
+      </div>  
+      }
+
+      {!onHome &&
+        <div className={"image-container"}>
+          <div className={"image-wrapper"} onWheel = {(e) => 
+            { 
+              const scrollContainer = document.querySelector(".image-wrapper");
+                scrollContainer.scrollLeft += e.deltaY;
+            }}>
+
+            {photos.map(image => ( 
+              <img className={"image-item"} src={image.urls.regular} key={image.id}/>
+            ))}
+          </div>
+        </div>
+      }
 
     </div>
   );
