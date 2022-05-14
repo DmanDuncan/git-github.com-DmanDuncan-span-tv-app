@@ -201,3 +201,45 @@ body {
         }
     }
 }
+
+// Arrow buttons
+// ----------------------------------
+
+.image-container {
+
+    .button {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 75px;
+        height: 75px;
+        background-color: $seconday;
+        border-radius: 50%;
+        border: 1px solid $primary;
+        color: $primary;
+        font-size: 30px;
+        transition: 500ms;
+        -webkit-user-select: none; /* Safari */        
+        -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* IE10+/Edge */
+        user-select: none; /* Standard */
+
+        &:hover {            
+            background-color: rgb(47,47,47, 0.5);
+        }
+    }
+
+    .button-right {
+        position: fixed;
+        right: 15px;
+        bottom: 90px;
+        cursor: pointer;
+    }
+
+    .button-left {
+        position: fixed;
+        left: 15px;
+        bottom: 90px;
+        cursor: pointer
+    }
+}

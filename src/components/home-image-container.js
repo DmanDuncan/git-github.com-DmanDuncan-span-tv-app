@@ -14,6 +14,16 @@ export function HomeImageContainer({homePhotosSetOne, homePhotosSetTwo}) {
           {homePhotosSetTwo.map(image => ( 
             <img className={"image-item"} src={image.urls.regular} key={image.id}/>
           ))}
+          <p className={"button button-left"} onClick={(e) => 
+          {
+              const scrollContainer = document.querySelector(".image-wrapper");
+              scrollContainer.scrollLeft -= 250;
+          }}>⬅</p>
+          <div className={"button button-right"} onClick={(e) => 
+          {
+              const scrollContainer = document.querySelector(".image-wrapper");
+              scrollContainer.scrollLeft += 250;
+          }}>➡</div>
         </div>
     </div>  
   );
